@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="100句雅思英语学习工具：语块、连读、记忆点与间隔复习。">
+  <title>句读 · 雅思100句学习室</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="paper-noise" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="回到今日学习">
+      <span class="brand-mark">句读</span>
+      <span class="brand-sub">IELTS SENTENCE STUDY</span>
+    </a>
+    <nav class="topnav" aria-label="主导航">
+      <button class="nav-link active" data-view="study">今日学习</button>
+      <button class="nav-link" data-view="library">100句目录</button>
+      <button class="nav-link" data-view="method">学习方法</button>
+    </nav>
+    <button class="icon-button mobile-menu" id="mobileMenu" aria-label="打开句子目录">☰</button>
+  </header>
+
+  <main class="app-shell">
+    <aside class="lesson-sidebar" id="lessonSidebar">
+      <div class="sidebar-head">
+        <p class="eyebrow">学习进度</p>
+        <div class="progress-copy"><strong id="progressText">0 / 100</strong><span>已掌握</span></div>
+        <div class="progress-track"><span id="progressBar"></span></div>
+      </div>
+      <label class="search-box">
+        <span aria-hidden="true">⌕</span>
+        <input id="lessonSearch" type="search" placeholder="搜索句子或主题" autocomplete="off">
+      </label>
+      <div class="topic-filter" id="topicFilter" aria-label="主题筛选"></div>
+      <div class="lesson-list" id="lessonList"></div>
+    </aside>
+
+    <section class="content" id="studyView">
+      <div class="source-banner">
+        <strong>微信读书原书版</strong>
+        <span>第1句已按原书顺序导入；后续句子将按学习日期逐句补充。</span>
+      </div>
+      <div class="study-status">
+        <div>
+          <p class="eyebrow" id="lessonMeta">第 01 句 · 教育</p>
+          <p class="status-note" id="statusNote"></p>
+        </div>
+        <div class="streak"><span>连续学习</span><strong id="streakCount">1 天</strong></div>
+      </div>
+
+      <article class="sentence-stage">
+        <div class="stage-index" id="stageIndex">01</div>
+        <p class="sentence" id="sentenceText"></p>
+        <p class="translation" id="translationText"></p>
+        <div class="audio-row">
+          <button class="primary-action" id="playSentence"><span class="play-icon">▶</span> 播放整句</button>
+          <label class="speed-control" for="speedRange">
+            <span>速度 <strong id="speedValue">0.65×</strong></span>
+            <input id="speedRange" type="range" min="0.5" max="1" step="0.05" value="0.65">
+          </label>
+          <button class="text-action" id="toggleTranslation">隐藏中文</button>
+        </div>
+      </article>
+
+      <section class="learning-section">
+        <div class="section-heading">
+          <div><span class="section-num">01</span><h2>先听语块</h2></div>
+          <p>点击每个语块，单独慢速听三遍。</p>
+        </div>
+        <div class="chunk-grid" id="chunkGrid"></div>
+      </section>
+
+      <section class="learning-section linking-section">
+        <div class="section-heading">
+          <div><span class="section-num">02</span><h2>连读拆解</h2></div>
+          <p>只记耳朵真正会听错的地方。</p>
+        </div>
+        <div class="linking-board">
+          <div class="spoken-line" id="spokenLine"></div>
+          <div class="linking-notes" id="linkingNotes"></div>
+          <button class="linking-play" id="playLinking">▶ 播放连读示范</button>
+        </div>
+      </section>
+
+      <section class="learning-section">
+        <div class="section-heading">
+          <div><span class="section-num">03</span><h2>记忆钩子</h2></div>
+          <p>把长句压缩成一条能复述的骨架。</p>
+        </div>
+        <div class="memory-layout">
+          <div class="memory-card">
+            <span class="card-label">句子骨架</span>
+            <p class="skeleton" id="sentenceSkeleton"></p>
+          </div>
+          <div class="memory-card warm">
+            <span class="card-label">画面记忆</span>
+            <p id="memoryHook"></p>
+          </div>
+        </div>
+        <div class="word-bank" id="wordBank"></div>
+      </section>
+
+      <section class="learning-section">
+        <div class="section-heading">
+          <div><span class="section-num">04</span><h2>句子知识点</h2></div>
+          <p>掌握结构、发音重点和可迁移词块。</p>
+        </div>
+        <div class="knowledge-grid" id="knowledgeGrid"></div>
+      </section>
+
+      <section class="learning-section recall-section">
+        <div class="section-heading">
+          <div><span class="section-num">05</span><h2>主动回忆</h2></div>
+          <p>遮住原句，根据中文和骨架说出来。</p>
+        </div>
+        <div class="recall-box">
+          <button class="recall-cover" id="recallCover">点击遮住英文，开始复述</button>
+          <div class="confidence-row" id="confidenceRow" hidden>
+            <span>这句现在有多熟？</span>
+            <button data-score="1">还不熟</button>
+            <button data-score="2">有点熟</button>
+            <button data-score="3">能复述</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="lesson-pagination">
+        <button id="prevLesson">← 上一句</button>
+        <span id="paginationText">01 / 100</span>
+        <button class="next-button" id="nextLesson">下一句 →</button>
+      </div>
+    </section>
+
+    <section class="content hidden" id="libraryView">
+      <div class="page-intro">
+        <p class="eyebrow">全书路线</p>
+        <h1>100句，10个雅思主题</h1>
+        <p>从2026年7月15日开始，每天按书中顺序解锁一句。先完成“听懂—拆句—复述”，再进入下一句。</p>
+      </div>
+      <div class="library-grid" id="libraryGrid"></div>
+    </section>
+
+    <section class="content hidden" id="methodView">
+      <div class="page-intro">
+        <p class="eyebrow">完整学习法</p>
+        <h1>一句话的五次相遇</h1>
+        <p>7000词不是一次背完，而是在100个语境里反复遇见、调用和巩固。</p>
+      </div>
+      <div class="method-timeline">
+        <article><span>01</span><div><h3>盲听整句</h3><p>0.65倍听2次，不看中文，只判断停顿和重音。</p></div></article>
+        <article><span>02</span><div><h3>语块精听</h3><p>逐块播放，每块跟读3次。先模仿节奏，再管发音。</p></div></article>
+        <article><span>03</span><div><h3>连读还原</h3><p>观察辅音接元音、弱读和失爆，把“听不见”变成“听得出”。</p></div></article>
+        <article><span>04</span><div><h3>骨架复述</h3><p>用主语—动作—结果的骨架重建整句，不逐词翻译。</p></div></article>
+        <article><span>05</span><div><h3>间隔复习</h3><p>当天、次日、第3天、第7天、第14天各复述一次。</p></div></article>
+      </div>
+      <div class="plan-board">
+        <h2>每天30分钟</h2>
+        <div class="plan-row"><strong>10分钟</strong><span>复习系统安排的旧句</span></div>
+        <div class="plan-row"><strong>15分钟</strong><span>学1条新句，完成语块与连读</span></div>
+        <div class="plan-row"><strong>5分钟</strong><span>关掉英文，复述今天的句子</span></div>
+      </div>
+      <p class="copyright-note">说明：本软件内置句子为原创雅思风格练习内容，并非原书正文。你可在获得合法文本后替换数据。</p>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
